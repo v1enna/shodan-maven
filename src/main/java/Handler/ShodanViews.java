@@ -27,7 +27,7 @@ public class ShodanViews extends HttpServlet {
     }
 
     public enum RequestedView {
-        LANDING,
+        MAIN,
         NAV,
         ADMIN
     }
@@ -50,6 +50,6 @@ public class ShodanViews extends HttpServlet {
 
         System.out.println("# ShodanViews > View ottenuta (" + user.getRole() + ", " + requestedView + ", " + path + ")");
 
-        response.getWriter().println(path);
+        response.getWriter().print(path);
     }
 }

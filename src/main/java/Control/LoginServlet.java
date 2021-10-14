@@ -32,8 +32,6 @@ public class LoginServlet extends HttpServlet {
 			
 		if(id != -1) {
 			User user = service.getUser(id); 
-
-			System.out.println("Ruolo: " + user.getRole());
 				
 			if(user.getPassword().equals(PasswordHasher.hash((request.getParameter("password"))))) {
 				response.setStatus(200);

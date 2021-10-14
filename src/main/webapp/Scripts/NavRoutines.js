@@ -99,7 +99,7 @@ $(document).ready(
 					window.location.replace(parsed_path);
 				}
 				
-				if(navigator.cookieEnabled && $(this) && $(this).attr("id").split("-")[0] != "admin")
+				if(navigator.cookieEnabled && $(this) && $(this).attr("id").split("-")[0] != "admin" && $(this).attr("id").split("-")[0] != "logout")
 					localStorage.setItem("last-page", container.split(".")[0]);
 					
 				$("#app").load("View/" + container).fadeIn("slow");

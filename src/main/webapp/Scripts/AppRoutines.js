@@ -2,26 +2,37 @@ $(document).ready(
 	() => {
 		console.log("# Shodan [Container: App]");
 
-		function defineNavView() {
-			$.ajax(
-				{
-					type: "GET",
-					url: "ShodanViews",
-					data: {
-						view: "NAV",
-						cookie: navigator.cookieEnabled,
-						jsession: window.location.href.substring(
-							window.location.href.lastIndexOf("=") + 1
-						)
-					},
-					error: (data) => console.log("# UserServlet (role) - 404/500" + data),
-					success: (data) => {
-						console.log("# UserServlet (role) - " + data);
-						$("nav").load(data);
-					}
-				}
-			);
-		}
+		var NAV_HANDLER = $.ajax(
+			{
+				type: "GET",
+				url: "ShodanViews",
+				data: {
+					view: "NAV",
+					cookie: navigator.cookieEnabled,
+					jsession: window.location.href.substring(
+						window.location.href.lastIndexOf("=") + 1
+					)
+				},
+				error: (data) => console.log("# UserServlet (role) - 4**/5**" + data),
+				success: (data) => console.log("# Shodan [Sidebar loaded from " + data + "]")
+			}
+		);
+
+		var MAIN_HANDLER = $.ajax(
+			{
+				type: "GET",
+				url: "ShodanViews",
+				data: {
+					view: "MAIN",
+					cookie: navigator.cookieEnabled,
+					jsession: window.location.href.substring(
+						window.location.href.lastIndexOf("=") + 1
+					)
+				},
+				error: (data) => console.log("# UserServlet (role) - 4**/**" + data),
+				success: (data) => console.log("# Shodan [Dashboard loaded from " + data + "]")
+			}
+		);
 
 		if(navigator.cookieEnabled) {
 			if(localStorage.getItem("last-page") != null) {
@@ -32,12 +43,18 @@ $(document).ready(
 				else
 					$("#app").load("View/" + localStorage.getItem("last-page") + ".jsp");
 			} else {
-				$("#app").load("View/Dashboard.jsp");
-				localStorage.setItem("last-page", "Dashboard.jsp");
+				MAIN_HANDLER.done(function(data) {
+					$("#app").load(data);
+					localStorage.setItem("last-page", data.split("/")[1].split(".")[0]); 	
+				});
 			}
 		} else
-			$("#app").load("View/Dashboard.jsp");
-		defineNavView();
+			MAIN_HANDLER.done(function(data) {
+				$("#app").load(data); 	
+			});
+		NAV_HANDLER.done(function(data) {
+			$("nav").load(data); 	
+		});
 	}
 );
 
