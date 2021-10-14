@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import Handler.ShodanViews.Role;
 
 public class User implements Serializable {
 
@@ -12,16 +13,16 @@ public class User implements Serializable {
 	private String password;
 	private String email;
 	private String session;
-	boolean admin;
+	private Role role;
 	
-	public User(int id, String username, String password, String email, int money, boolean admin, String session) {
+	public User(int id, String username, String password, String email, int money, String session, Role role) {
 		this.id = id;
 		this.money = money;
 		this.name = username;
 		this.password = password;
 		this.email = email;
-		this.admin = admin;
 		this.session = session;
+		this.role = role;
 	}
 	
 	public int getId() {
@@ -43,15 +44,15 @@ public class User implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	
-	public boolean isAdmin() {
-		return admin;
-	}
-	
+
 	public String getSession() {
 		return session;
 	}
 	
+	public Role getRole() {
+		return this.role;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -71,15 +72,15 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
 	
 	public void setSession(String session) {
 		this.session = session;
 	}
-	
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public String toString() {
 		return "[" + id + "] " + name; 
 	}

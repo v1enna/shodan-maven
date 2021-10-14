@@ -65,10 +65,10 @@ public class ShodanFilters implements Filter {
 		} else if(uri.contains("/app.jsp")) {
 			if(user == null)
 				hResponse.sendRedirect("index.jsp" + encoding);
-		} else if(uri.contains("/admin.jsp")) {
+		} /*else if(uri.contains("/admin.jsp")) {
 			if(user == null || !user.isAdmin())
 				hResponse.sendRedirect("app.jsp" + encoding);
-		}
+		}*/
 	}
 
 	public void destroy() {

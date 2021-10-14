@@ -1,7 +1,28 @@
 $(document).ready(
 	() => {
 		console.log("# Shodan [Container: App]");
-		
+
+		function defineNavView() {
+			$.ajax(
+				{
+					type: "GET",
+					url: "ShodanViews",
+					data: {
+						view: "NAV",
+						cookie: navigator.cookieEnabled,
+						jsession: window.location.href.substring(
+							window.location.href.lastIndexOf("=") + 1
+						)
+					},
+					error: (data) => console.log("# UserServlet (role) - 404/500" + data),
+					success: (data) => {
+						console.log("# UserServlet (role) - " + data);
+						$("nav").load(data);
+					}
+				}
+			);
+		}
+
 		if(navigator.cookieEnabled) {
 			if(localStorage.getItem("last-page") != null) {
 				if((localStorage.getItem("last-page") == "Game") && (new URLSearchParams(window.location.search).has("game")))
@@ -16,7 +37,7 @@ $(document).ready(
 			}
 		} else
 			$("#app").load("View/Dashboard.jsp");
-		$("nav").load("View/Nav.jsp");
+		defineNavView();
 	}
 );
 

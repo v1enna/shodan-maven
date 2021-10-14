@@ -26,7 +26,7 @@ if(!navigator.cookieEnabled) {
 $(document).ready(
 	() => {
 		if(navigator.cookieEnabled) {
-			if(localStorage.getItem("sider") == "open" || localStorage.getItem("sider") == null)
+			if(localStorage.getItem("sider") == "open" || localStorage.getItem("sider") == null) 
 				openSider();
 			else
 				closeSider();
