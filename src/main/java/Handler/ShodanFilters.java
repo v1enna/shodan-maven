@@ -59,16 +59,19 @@ public class ShodanFilters implements Filter {
 		if(user != null)
 			System.out.println("# ShodanFilters > Routing di [" + user.getId() + "] " + user.getName());
 		
-		if(uri.contains("/index.jsp") || uri.contains("Shodan/;jsessionid=") || uri.equals("/Shodan/")) {
+		/*if(uri.contains("/index.jsp") || uri.contains("Shodan/;jsessionid=") || uri.equals("/Shodan/")) {
 			if(user != null)
 				hResponse.sendRedirect("app.jsp" + encoding);
 		} else if(uri.contains("/app.jsp")) {
 			if(user == null)
 				hResponse.sendRedirect("index.jsp" + encoding);
-		} /*else if(uri.contains("/admin.jsp")) {
+		} else if(uri.contains("/admin.jsp")) {
 			if(user == null || !user.isAdmin())
 				hResponse.sendRedirect("app.jsp" + encoding);
 		}*/
+
+		if(uri.contains("/index.jsp") && user != null)
+			hResponse.sendRedirect("app.jsp" + encoding);
 	}
 
 	public void destroy() {

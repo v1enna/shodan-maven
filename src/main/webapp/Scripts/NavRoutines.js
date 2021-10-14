@@ -149,9 +149,18 @@ $(document).ready(
 						},
 						success: () => {
 							window.location.replace("index.jsp");
+							localStorage.removeItem("last-page");
 						}
 					}
 				);
+			}
+		);
+
+		$("#back-link").click(
+			() => {
+				document.cookie = "user_session=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+				window.location.replace("index.jsp");
+				localStorage.removeItem("last-page");
 			}
 		);
 	}

@@ -24,7 +24,7 @@
 		<span>Notizie</span>
 	</div>
 					
-	<div id="logout-link">
+	<div id="back-link">
 		<i class="far fa-dizzy"></i>
 		<span>Indietro</span>
 	</div>
