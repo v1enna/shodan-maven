@@ -112,8 +112,7 @@ main {
 }
 
 .shodan-form-container {
-	background: #2b2b2b;
-	padding: 35px;
+	padding: 20px;
 }
 
 .shodan-info-container {
@@ -220,7 +219,7 @@ footer {
 	background-position: center;
 	display: flex;
 	position: absolute;
-    width: 105%;
+    width: 100%;
     top: 0;
 }
 
@@ -240,12 +239,10 @@ video {
 .shodan-form-container form {
 	border-radius: 5px;
 	padding: 25px;
-	margin-left: 20px;
 	display: flex;
 	flex-direction: column;
 	min-width: 300px;
 	background: #322d33;
-	box-shadow: 2px 2px #fb21ff;
 	justify-content: center;
 }
 
@@ -365,25 +362,15 @@ input:-webkit-autofill:focus {
 	}
 }
 
-@media screen and (max-width: 830px) {
-	.shodan-info-container,
-	.shodan-form-container {
-		flex-direction: column;
+@media screen and (max-width: 1100px) {
+	.shodan-submain {
+		height: auto;
 	}
-	
-	.shodan-form-container {
-		padding: 25px;
+
+	.shodan-info-container {
+		flex-flow: column;
 	}
-	
-	.shodan-form-container>form {
-		margin-bottom: 17.5px;
-		margin-left: 0;
-	}
-	
-	.shodan-logo {
-		background-size: 85%;
-	}
-	
+
 	.shodan-vhs,
 	.shodan-tv,
 	.shodan-logo {

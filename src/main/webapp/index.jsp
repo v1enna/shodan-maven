@@ -63,7 +63,41 @@
 						</div>	
 					</div>
 					
-					<div class="shodan-info">
+					<div class="shodan-form-container bordered">
+						<form id="login-form" onsubmit="tryLogin(); return false">
+							<h1>Accesso</h1>
+							
+							<input id="login-username" required placeholder="Username" type="text">
+							<input id="login-password" required placeholder="Password" type="password">
+							<input id="login-submit" type="submit">
+							
+							<div id="login-message"></div>
+				
+							<div class="form-bottom">
+								<span class="flip-index-card" id="flip-login-card">Sei un nuovo utente? Registrati!</span><br />
+								<span>In alternativa, <a href="app.jsp">accedi come ospite</a></span>
+							</div>
+						</form>
+					
+						<form id="signin-form" style="display: none" onsubmit="trySignIn(); return false">
+							<h1>Registrazione</h1>
+							
+							<input id="signin-username" required placeholder="Username" type="text">
+							<input id="signin-password" required placeholder="Password" type="password">
+							<input id="signin-password-again" required placeholder="Ripeti la password" type="password">
+							<input id="signin-email" required placeholder="Email" type="email">
+							<input id="signin-submit" type="submit">
+							
+							<div id="signin-message"></div>
+	
+							<div class="form-bottom">
+								<span class="flip-index-card" id="flip-signin-card">Sei un utente registrato? Accedi!</span><br />
+								<span>In alternativa, <a href="app.jsp">accedi come ospite</a></span>
+							</div>
+						</form>
+					</div>
+
+					<div class="shodan-info bordered">
 						<div class="shodan-info-content">
 							<i class="fas fa-shopping-cart"></i>
 							<span>Supporta direttamente gli autori</span>
@@ -73,47 +107,27 @@
 							</p>
 						</div>	
 					</div>
-				</div>
-				
-				<div class="shodan-form-container">
-					<form id="login-form" onsubmit="tryLogin(); return false">
-						<h1>Accesso</h1>
-						
-						<input id="login-username" required placeholder="Username" type="text">
-						<input id="login-password" required placeholder="Password" type="password">
-						<input id="login-submit" type="submit">
-						
-						<div id="login-message"></div>
-			
-						<div class="form-bottom">
-							<span class="flip-index-card" id="flip-login-card">Sei un nuovo utente? Registrati!</span><br />
-							<span>In alternativa, <a href="app.jsp">accedi come ospite</a></span>
-						</div>
-					</form>
-				
-					<form id="signin-form" style="display: none" onsubmit="trySignIn(); return false">
-						<h1>Registrazione</h1>
-						
-						<input id="signin-username" required placeholder="Username" type="text">
-						<input id="signin-password" required placeholder="Password" type="password">
-						<input id="signin-password-again" required placeholder="Ripeti la password" type="password">
-						<input id="signin-email" required placeholder="Email" type="email">
-						<input id="signin-submit" type="submit">
-						
-						<div id="signin-message"></div>
 
-						<div class="form-bottom">
-							<span class="flip-index-card" id="flip-signin-card">Sei un utente registrato? Accedi!</span><br />
-							<span>In alternativa, <a href="app.jsp">accedi come ospite</a></span>
-						</div>
-					</form>
+					<div class="shodan-info bordered">
+						<div class="shodan-info-content">
+							<i class="fas fa-band-aid"></i>
+							<span>Ricevi gli ultimi aggiornamenti</span>
+							<p>
+								I giochi che vendiamo sono aggiornati all'ultima patch disponibile rilasciata dall'azienda sviluppatrice. <br />
+								Nessun bug, nessun crash, nessun problema di compatibilit&agrave;:
+								semplicemente avvia il titolo e inizia a giocare!
+							</p>
+						</div>	
+					</div>
 				</div>
+				
+				
 			
 			</div>
 			
 			<footer>
 				<div>
-					<a href="https://github.com/v1enna/shodan" target="_blank">Shodan</a>
+					<a href="https://github.com/is-shodan-20-21" target="_blank">Shodan</a>
 				</div>
 			</footer>
 		</main>
