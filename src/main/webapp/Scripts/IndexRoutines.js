@@ -1,14 +1,13 @@
 
 $(document).ready(
 	() => {
-
 		$.ajax(
 			{
 				method: "GET",
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 4,
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
 				beforeSend: () => {
@@ -28,7 +27,7 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 4,
 					order: "DESC",
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
@@ -42,7 +41,20 @@ $(document).ready(
 				}
 			}
 		);
-						
+		
+		$("#flip-login-card").click(
+			() => {
+				$("#login-form").hide();
+				$("#signin-form").show();
+			}
+		);
+
+		$("#flip-signin-card").click(
+			() => {
+				$("#signin-form").hide();
+				$("#login-form").show();
+			}
+		);
 	}
 );
 

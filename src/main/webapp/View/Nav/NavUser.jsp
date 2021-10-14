@@ -43,11 +43,6 @@
 			<i class="far fa-clipboard"></i>
 		</span>
 	</div>
-	
-	<div id="admin-link">
-		<i class="fas fa-users-cog"></i>
-		<span>Admin</span>
-	</div>
 					
 	<div id="logout-link">
 		<i class="far fa-dizzy"></i>
