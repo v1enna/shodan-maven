@@ -57,20 +57,35 @@ $(document).ready(
 		} else
 			$("#dashboard-link").addClass("selected");
 		
+		var MAIN_HANDLER = $.ajax(
+			{
+				type: "GET",
+				url: "ShodanViews",
+				data: {
+					view: "MAIN",
+					cookie: navigator.cookieEnabled,
+					jsession: window.location.href.substring(
+						window.location.href.lastIndexOf("=") + 1
+					)
+				}
+			}
+		);
+
 		$("#nav-logo").click(
-			() => {
-				$("#app").load("View/Dashboard.jsp");
-				if(navigator.cookieEnabled)
-					localStorage.setItem("last-page", "Dashboard");
-				
+			() => {			
 				$("#nav-items>div").each(
 					function() {
 						if($(this).hasClass("selected"))
 							$(this).toggleClass("selected");
 					}
 				);
-				
-				$("#dashboard-link").addClass("selected");
+
+				MAIN_HANDLER.done(function(data) {
+					$("#app").load(data);
+					$("#" + data.split("/")[1].split(".")[0].toLowerCase() + "-link").addClass("selected");
+					if(navigator.cookieEnabled)
+						localStorage.setItem("last-page", data.split("/")[1].split(".")[0]);
+				});
 			}
 		);
 				
