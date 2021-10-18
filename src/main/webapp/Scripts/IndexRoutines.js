@@ -1,14 +1,13 @@
 
 $(document).ready(
 	() => {
-
 		$.ajax(
 			{
 				method: "GET",
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 4,
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
 				beforeSend: () => {
@@ -28,7 +27,7 @@ $(document).ready(
 				url: "GameServlet",
 				data: {
 					action: "shop",
-					limit: 5,
+					limit: 4,
 					order: "DESC",
 					endpoint: "View/AJAX_Components/GameSlideshow.jsp"
 				},
@@ -42,7 +41,20 @@ $(document).ready(
 				}
 			}
 		);
-						
+		
+		$("#flip-login-card").click(
+			() => {
+				$("#login-form").hide();
+				$("#signin-form").show();
+			}
+		);
+
+		$("#flip-signin-card").click(
+			() => {
+				$("#signin-form").hide();
+				$("#login-form").show();
+			}
+		);
 	}
 );
 
@@ -62,13 +74,28 @@ function tryLogin(){
 				else
 					window.history.pushState(null, null, data);
 				
-				if(navigator.cookieEnabled)
-					localStorage.setItem("last-page", "Dashboard");
-				
 				$(document.body).fadeOut(400, 
 					() => {
 						$(document.body).load("View/AJAX_Components/Loading.jsp");
 						$(document.body).fadeIn();
+						
+						var MAIN_HANDLER = $.ajax(
+							{
+								type: "GET",
+								url: "ShodanViews",
+								data: {
+									view: "MAIN",
+									cookie: navigator.cookieEnabled,
+									jsession: window.location.href.substring(
+										window.location.href.lastIndexOf("=") + 1
+									)
+								}
+							}
+						);
+
+						MAIN_HANDLER.done(function(data) {
+							localStorage.setItem("last-page", data.split("/")[1].split(".")[0]);
+						});
 					}
 				);
 			},
@@ -99,6 +126,24 @@ function trySignIn(){
 					$("#signin-message").html(data);
 					$("#signin-message").css("color", "green");
 					$("#signin-message").show();
+
+					var MAIN_HANDLER = $.ajax(
+						{
+							type: "GET",
+							url: "ShodanViews",
+							data: {
+								view: "MAIN",
+								cookie: navigator.cookieEnabled,
+								jsession: window.location.href.substring(
+									window.location.href.lastIndexOf("=") + 1
+								)
+							}
+						}
+					);
+
+					MAIN_HANDLER.done(function(data) {
+						localStorage.setItem("last-page", data.split("/")[1].split(".")[0]);
+					});
 				},
 				error: (data) => {
 					$("#signin-message").html(data.responseText);

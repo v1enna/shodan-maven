@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import Handler.ShodanViews.Role;
+
 import java.sql.PreparedStatement;
 import Model.User;
 
@@ -52,16 +55,19 @@ public class UserService implements Serializable {
 			
 			System.out.println("# UserService > Query > " + query);
 			
-			if(result.next())
+
+
+			if(result.next()) {
 				user = new User(
 					result.getInt("user_id"),
 					result.getString("user_name"),
 					result.getString("user_password"),
 					result.getString("user_email"),
 					result.getInt("user_money"),
-					result.getBoolean("user_admin"),
-					result.getString("user_session")
+					result.getString("user_session"),
+					Role.valueOf(result.getString("user_role"))
 				);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -78,7 +84,7 @@ public class UserService implements Serializable {
 				+ ", user_password = ?"
 				+ ", user_email = ?"
 				+ ", user_money = ?"
-				+ ", user_admin =  ?"
+				+ ", user_role = ?"
 				+ ", user_session =  ?"
 				+ " WHERE user_id = ?";
 		
@@ -90,7 +96,7 @@ public class UserService implements Serializable {
 			statement.setString(3, user.getPassword());
 			statement.setString(4, user.getEmail());
 			statement.setInt(5, user.getMoney());
-			statement.setBoolean(6, user.isAdmin());
+			statement.setString(6, user.getRole().toString());
 			statement.setString(7, user.getSession());
 			statement.setInt(8, user.getId());
 			

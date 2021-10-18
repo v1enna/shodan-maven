@@ -21,6 +21,7 @@ body {
 main {
 	flex: 0.85;
 	position: relative;
+	min-height: 100%;
 }
 
 .game-container {
@@ -111,8 +112,7 @@ main {
 }
 
 .shodan-form-container {
-	background: #2b2b2b;
-	padding: 35px;
+	padding: 20px;
 }
 
 .shodan-info-container {
@@ -123,6 +123,13 @@ main {
 	border-left: 2.5px solid #fb21ff;
 	border-right: 2.5px solid #fb21ff;
 	padding-bottom: 25px;
+}
+
+.shodan-submain {
+	display: flex;
+	flex-flow: row;
+	height: 40%;
+	width: 100%;
 }
 
 a {
@@ -138,11 +145,39 @@ a:hover {
 .shodan-info {
 	flex: 0.3;
 	display: flex;
+	align-items: center;
 	justify-content: center;
 }
 
 .shodan-logo-container {
 	border-bottom: 5px solid black;
+}
+
+.form-bottom {
+	text-align: center;
+	align-self: flex-end;
+	margin-top: 20px;
+	line-height: 22.5px;
+	width: 100%;
+}
+
+.form-bottom .flip-index-card {
+	font-size: 16px;
+	color: #ff71f7;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.form-bottom span {
+	font-size: 14.5px;
+}
+
+.form-bottom .flip-index-card:hover {
+	text-decoration: underline;
+}
+
+.form-bottom a {
+	font-weight: 550;
 }
 
 footer {
@@ -204,12 +239,11 @@ video {
 .shodan-form-container form {
 	border-radius: 5px;
 	padding: 25px;
-	margin-left: 20px;
 	display: flex;
 	flex-direction: column;
 	min-width: 300px;
 	background: #322d33;
-	box-shadow: 2px 2px #fb21ff;
+	justify-content: center;
 }
 
 .shodan-form-container form h1 {
@@ -328,25 +362,15 @@ input:-webkit-autofill:focus {
 	}
 }
 
-@media screen and (max-width: 830px) {
-	.shodan-info-container,
-	.shodan-form-container {
-		flex-direction: column;
+@media screen and (max-width: 1100px) {
+	.shodan-submain {
+		height: auto;
 	}
-	
-	.shodan-form-container {
-		padding: 25px;
+
+	.shodan-info-container {
+		flex-flow: column;
 	}
-	
-	.shodan-form-container>form {
-		margin-bottom: 17.5px;
-		margin-left: 0;
-	}
-	
-	.shodan-logo {
-		background-size: 85%;
-	}
-	
+
 	.shodan-vhs,
 	.shodan-tv,
 	.shodan-logo {

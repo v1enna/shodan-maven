@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Handler.ShodanViews.Role;
 import Model.Game;
 import Model.User;
 import Service.GameService;
@@ -37,6 +39,13 @@ public class UserServlet extends HttpServlet {
 			user = (User) request.getSession().getAttribute("user_metadata");
 		
 		switch(request.getParameter("action")) {
+			case "role":
+				System.out.println("# UserSerlvet > GET > Accesso al ruolo (" + user.getRole().toString() + ")");
+					
+				response.getWriter().println(user.getRole().toString());
+				
+				break;
+
 			case "info":
 				System.out.println("# UserSerlvet > GET > Accesso ai dati personali di " + user.getName());
 					
@@ -100,7 +109,7 @@ public class UserServlet extends HttpServlet {
 				User user = new UserService(db).getUser(Integer.valueOf(request.getParameter("user-id")));
 				
 				if(user != null ) {
-					if(!user.isAdmin()) {
+					if((user.getRole() != Role.STOREMAN) && (user.getRole() != Role.WRITER)) {
 						new UserService(db).deleteUser(Integer.valueOf(request.getParameter("user-id")));
 					
 						request.setAttribute("messageUserDelete", "Utente eliminato con successo");
