@@ -42,7 +42,7 @@ public class ShodanViews extends HttpServlet {
 		else
 			user = (User) request.getSession().getAttribute("user_metadata");
 
-        Role role = user != null ? new HasRoleService(db).getMainRole(user.getRoles()) : null;
+        Role role = user != null ? new HasRoleService(db).getMainRole(user.getRoles()) : new Role(-1, "GUEST");
         String path = new ViewService(db).getView(role, requestedView);
 
         System.out.println("# ShodanViews > View ottenuta (" + role.getRoleName() + ", " + requestedView + ", " + path + ")");

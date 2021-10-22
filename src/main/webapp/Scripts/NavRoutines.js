@@ -25,6 +25,26 @@ if(!navigator.cookieEnabled) {
 
 $(document).ready(
 	() => {
+		var ROLES_HANDLER = $.ajax(
+			{
+				type: "GET",
+				url: "UserServlet",
+				data: {
+					cookie: navigator.cookieEnabled,
+					jsession: window.location.href.substring(
+						window.location.href.lastIndexOf("=") + 1
+					),
+					action: "switchableRoles",
+					endpoint: "View/AJAX_Components/RolesList.jsp",
+				},
+				success: (data) => { 
+					console.log("# Shodan [Multiple roles detected]");
+					$("<div id='roles-placeholder'></div>").insertBefore($("#logout-link"));
+					$("#roles-placeholder").html(data);
+				}
+			}
+		)
+
 		if(navigator.cookieEnabled) {
 			if(localStorage.getItem("sider") == "open" || localStorage.getItem("sider") == null) 
 				openSider();
@@ -91,33 +111,26 @@ $(document).ready(
 				
 		$("#nav-items>div").click(	
 			function() {
-				let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
-				window.history.pushState(null, null, parsed_path);
+				if($(this).attr("id").split("-")[0] != "roles") {
+					let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
+					window.history.pushState(null, null, parsed_path);
+						
+					$("#nav-items>div").each(
+						function() {
+							if($(this).hasClass("selected"))
+								$(this).toggleClass("selected");
+						}
+					);
+						
+					$(this).addClass("selected");
+						
+					let container = $(this).attr("id")[0].toUpperCase() + $(this).attr("id").split("-")[0].slice(1) + ".jsp";
 					
-				$("#nav-items>div").each(
-					function() {
-						if($(this).hasClass("selected"))
-							$(this).toggleClass("selected");
-					}
-				);
-					
-				$(this).addClass("selected");
-					
-				let container = $(this).attr("id")[0].toUpperCase() + $(this).attr("id").split("-")[0].slice(1) + ".jsp";
-				
-				if($(this).attr("id").split("-")[0] == "admin") {
-					let parsed_path;
-					if(!navigator.cookieEnabled)
-						parsed_path = "admin.jsp" + window.location.href.substring(window.location.href.indexOf(";"));
-					else
-						parsed_path = "admin.jsp";
-					window.location.replace(parsed_path);
+					if(navigator.cookieEnabled && $(this) && $(this).attr("id").split("-")[0] != "admin" && $(this).attr("id").split("-")[0] != "logout")
+						localStorage.setItem("last-page", container.split(".")[0]);
+						
+					$("#app").load("View/" + container).fadeIn("slow");
 				}
-				
-				if(navigator.cookieEnabled && $(this) && $(this).attr("id").split("-")[0] != "admin" && $(this).attr("id").split("-")[0] != "logout")
-					localStorage.setItem("last-page", container.split(".")[0]);
-					
-				$("#app").load("View/" + container).fadeIn("slow");
 			}
 		);
 	

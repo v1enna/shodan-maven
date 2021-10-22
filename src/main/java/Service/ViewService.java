@@ -30,7 +30,6 @@ public class ViewService {
 
             if(result.next())
                 path = DEFAULT_DIR + result.getString("path");
-
         } catch(SQLException e) {
             e.printStackTrace();
         }
