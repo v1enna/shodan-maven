@@ -48,13 +48,24 @@ $(document).ready(
 					localStorage.setItem("last-page", data.split("/")[1].split(".")[0]); 	
 				});
 			}
-		} else
+
+			if(localStorage.getItem("last-nav") != null)
+				$("nav").load("View/Nav/" + localStorage.getItem("last-nav") + ".jsp");
+			else {
+				NAV_HANDLER.done(function(data) {
+					$("nav").load(data);
+					localStorage.setItem("last-nav", data.split("/")[2].split(".")[0]);  	
+				});
+			}
+		} else {
 			MAIN_HANDLER.done(function(data) {
 				$("#app").load(data); 	
 			});
-		NAV_HANDLER.done(function(data) {
-			$("nav").load(data); 	
-		});
+
+			NAV_HANDLER.done(function(data) {
+				$("nav").load(data); 	
+			});
+		}
 	}
 );
 

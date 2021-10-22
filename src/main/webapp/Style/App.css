@@ -119,6 +119,10 @@ body nav {
 	background: #171717;
 	z-index: 1;
 	position: fixed;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 body nav .selected {
@@ -191,7 +195,6 @@ body nav #nav-items #roles-link #roles-items .role-item {
 	padding: 10px;
 	margin-bottom: 4px;
 	cursor: pointer;
-	transition: 0.5s;
 	border-radius: 3px;
 }
 
@@ -280,7 +283,7 @@ body main #app .featured {
 }
 
 body main #app .featured .featured-text-outer {
-	background: linear-gradient(to right, transparent 0%, black 60%);
+	background: linear-gradient(to right, transparent 0%, black 35%);
 	height: 100%;
 	width: 80%;
 	float: right;
@@ -292,7 +295,7 @@ body main #app .featured .featured-text-outer {
 
 body main #app .featured .featured-text-outer .featured-text-inner {
 	font-size: 15px;
-	margin-left: 40%;
+	margin-left: 20%;
 }
 
 body main #app .featured .featured-text-outer .featured-text-inner strong  {

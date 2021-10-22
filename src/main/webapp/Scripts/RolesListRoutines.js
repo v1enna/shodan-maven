@@ -22,6 +22,9 @@ $(document).ready(() => {
 
             console.log("# Shodan [Requesting " + requestedRole +" views]");
 
+            let parsed_path = window.location.href.substring(0, window.location.href.indexOf("?"));
+			window.history.pushState(null, null, parsed_path);
+
             var NAV_HANDLER = $.ajax(
                 {
                     type: "GET",
@@ -36,7 +39,8 @@ $(document).ready(() => {
                     },
                     error: (data) => console.log("# ShodanViews - 4**/5**" + data),
                     success: (data) => { 
-                        console.log("# Shodan [Sidebar loaded]");
+                        console.log(data);
+                        localStorage.setItem("last-nav", data.split("/")[2].split(".")[0]); 
                         $("nav").load(data);
                     }
                 }
@@ -57,6 +61,7 @@ $(document).ready(() => {
                     error: (data) => console.log("# ShodanViews - 4**/5**" + data),
                     success: (data) => { 
                         console.log("# Shodan [Dashboard loaded]");
+                        localStorage.setItem("last-page", data.split("/")[1].split(".")[0]); 
                         $("#app").load(data);  
                     }
                 }

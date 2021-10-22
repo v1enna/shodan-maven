@@ -186,6 +186,7 @@ $(document).ready(
 						success: () => {
 							window.location.replace("index.jsp");
 							localStorage.removeItem("last-page");
+							localStorage.removeItem("last-nav");
 						}
 					}
 				);
