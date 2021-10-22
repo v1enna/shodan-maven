@@ -56,7 +56,7 @@ public class UserServlet extends HttpServlet {
 				break;
 
 			case "switchableRoles":
-				if(user.getRoles().size() > 1) {
+				if(user != null && user.getRoles().size() > 1) {
 					System.out.println("# UserServlet > GET > Accesso alla lista dei ruoli dell'utente");
 
 					ArrayList<Role> roles = user.getRoles();

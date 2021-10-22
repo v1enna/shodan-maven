@@ -41,6 +41,9 @@ $(document).ready(
 					console.log("# Shodan [Multiple roles detected]");
 					$("<div id='roles-placeholder'></div>").insertBefore($("#logout-link"));
 					$("#roles-placeholder").html(data);
+				},
+				error: (data) => {
+					console.log("# Shodan [User either has no admin powers or is a guest]");
 				}
 			}
 		)
@@ -106,6 +109,26 @@ $(document).ready(
 					if(navigator.cookieEnabled)
 						localStorage.setItem("last-page", data.split("/")[1].split(".")[0]);
 				});
+
+				
+				var NAV_HANDLER = $.ajax(
+					{
+						type: "GET",
+						url: "ShodanViews",
+						data: {
+							view: "NAV",
+							cookie: navigator.cookieEnabled,
+							jsession: window.location.href.substring(
+								window.location.href.lastIndexOf("=") + 1
+							)
+						},
+						error: (data) => console.log("# ShodanViews - 4**/5**" + data),
+						success: (data) => { 
+							console.log("# Shodan [Sidebar loaded]");
+							$("nav").load(data);
+						}
+					}
+				);
 			}
 		);
 				

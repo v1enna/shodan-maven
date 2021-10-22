@@ -13,8 +13,8 @@ $(document).ready(
 						window.location.href.lastIndexOf("=") + 1
 					)
 				},
-				error: (data) => console.log("# UserServlet (role) - 4**/5**" + data),
-				success: (data) => console.log("# Shodan [Sidebar loaded from " + data + "]")
+				error: (data) => console.log("# ShodanViews - 4**/5**" + data),
+				success: (data) => console.log("# Shodan [Sidebar loaded]")
 			}
 		);
 
@@ -29,8 +29,8 @@ $(document).ready(
 						window.location.href.lastIndexOf("=") + 1
 					)
 				},
-				error: (data) => console.log("# UserServlet (role) - 4**/**" + data),
-				success: (data) => console.log("# Shodan [Dashboard loaded from " + data + "]")
+				error: (data) => console.log("# ShodanViews - 4**/5**" + data),
+				success: (data) => console.log("# Shodan [Dashboard loaded]")
 			}
 		);
 

@@ -1,15 +1,66 @@
-$("#roles-link").click(
-    function(e) {
-        if (e.target !== this)
-            return;
-        else {
-            if($("#roles-link").hasClass("selected")) {
-                $("#roles-link").removeClass("selected");
-                $("#roles-items").hide();
-            } else {
-                $("#roles-link").addClass("selected");
-                $("#roles-items").show();
-            }
+$(document).ready(() => {
+    function openRolesList(e) {
+        e.stopImmediatePropagation();
+
+        if($("#roles-link").hasClass("selected")) {
+            $("#roles-link").removeClass("selected");
+            $(".fa-chevron-right").removeClass("rotate-icon");
+            $("#roles-items").hide();
+        } else {
+            $("#roles-link").addClass("selected");
+            $(".fa-chevron-right").addClass("rotate-icon");
+            $("#roles-items").show();
         }
     }
-)
+
+    $(".role-selector-icon").click((e) => openRolesList(e))
+    $("#roles-link").click((e) => openRolesList(e));
+
+    $(".role-item").click(
+        function() {
+            let requestedRole = $(this).attr("data-role-name");
+
+            console.log("# Shodan [Requesting " + requestedRole +" views]");
+
+            var NAV_HANDLER = $.ajax(
+                {
+                    type: "GET",
+                    url: "ShodanViews",
+                    data: {
+                        view: "NAV",
+                        requestedRole: requestedRole,
+                        cookie: navigator.cookieEnabled,
+                        jsession: window.location.href.substring(
+                            window.location.href.lastIndexOf("=") + 1
+                        )
+                    },
+                    error: (data) => console.log("# ShodanViews - 4**/5**" + data),
+                    success: (data) => { 
+                        console.log("# Shodan [Sidebar loaded]");
+                        $("nav").load(data);
+                    }
+                }
+            );
+
+            var MAIN_HANDLER = $.ajax(
+                {
+                    type: "GET",
+                    url: "ShodanViews",
+                    data: {
+                        view: "MAIN",
+                        requestedRole: requestedRole,
+                        cookie: navigator.cookieEnabled,
+                        jsession: window.location.href.substring(
+                            window.location.href.lastIndexOf("=") + 1
+                        )
+                    },
+                    error: (data) => console.log("# ShodanViews - 4**/5**" + data),
+                    success: (data) => { 
+                        console.log("# Shodan [Dashboard loaded]");
+                        $("#app").load(data);  
+                    }
+                }
+            );
+        }
+    );
+});

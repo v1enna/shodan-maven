@@ -15,7 +15,12 @@
 
     <div id="roles-items">
         <c:forEach items="${roles}" var="role">
-            <div class="role-item"> ${role.parsedRoleName} </div>
+            <div 
+                class="role-item"
+                data-role-name="${role.roleName}"
+            > 
+                ${role.parsedRoleName} 
+            </div>
         </c:forEach>
     </div>
 </div>
